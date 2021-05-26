@@ -17,8 +17,19 @@ Route::group(['middleware' => 'web'], function (){
     Route::get('/', function () {
     return view ('tasks');
  });
-    Route::get('/tasks', function (Request $request) {
+    Route::post('/tasks', function (Request $request) {
     //
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|max255'
+    ]);
+    if ($validator -> fails()){
+        return redirect('/')->withInput();
+    }
+    $task = new Tasks();
+    $task -> name = $request -> name;
+    $task -> saVe();
+    
+    return redirect('/'); 
  });
      Route::get('/tasks{task}', function (Tasks $task) {
     //
