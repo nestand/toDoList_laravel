@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'web'], function (){
     Route::get('/', function () {
-    return view ('tasks');
+    $tasks = Tasks::orderBy('created_at', 'asc')->get();
+        return view ('tasks', ["tasks"=>$tasks]);
  });
     Route::post('/tasks', function (Request $request) {
     //
