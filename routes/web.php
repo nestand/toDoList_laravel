@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'web'], function (){
+    Route::get('/', function () {
+    return view ('tasks');
+ });
+    Route::get('/tasks', function (Request $request) {
+    //
+ });
+     Route::get('/tasks{task}', function (Tasks $task) {
+    //
+ });
 });
