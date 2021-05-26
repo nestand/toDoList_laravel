@@ -4,9 +4,18 @@
     <div class="panel-body">
         @include('common.errors')
 
-        <form action="{{ url('tasks') }} method=" post" class="form-horizontal">
+        <form action="{{ url('tasks') }}" method="post" class="form-horizontal">
             {{-- against CSRF attacks, we need to include empty CSRF field --}}
             {{ csrf_field() }}
+        </form>
+
+        <form action="{{ url('tasks->id') }}" method="post">
+            {{-- against CSRF attacks, we need to include empty CSRF field --}}
+            {{ csrf_field() }}
+            {!!method_field('DELETE')!!}
+            <button class ="btn btn-danger">
+                <i class= "fa fa-trash">Delete</i>
+            </button>
         </form>
 
         @if (count($tasks) > 0)

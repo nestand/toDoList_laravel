@@ -28,11 +28,12 @@ Route::group(['middleware' => 'web'], function (){
     }
     $task = new Tasks();
     $task -> name = $request -> name;
-    $task -> saVe();
+    $task -> save();
     
     return redirect('/'); 
  });
-     Route::get('/tasks{task}', function (Tasks $task) {
-    //
+     Route::delete('/tasks{task}', function (Tasks $task) {
+    $task ->delete();
+    return redirect('/');
  });
 });
